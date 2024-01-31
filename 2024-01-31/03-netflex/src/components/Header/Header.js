@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/auth.context";
-import ProfileContext from "../../contexts/profile.context";
+import { useProfile } from "../../contexts/profile.context";
 
 function Header() {
   const { isLoggedIn, logOut } = useAuth();
-  const { nickname } = useContext(ProfileContext);
+  const { nickname } = useProfile();
 
   return (
     <header className={styles.header}>

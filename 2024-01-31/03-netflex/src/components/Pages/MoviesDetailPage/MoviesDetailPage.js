@@ -1,36 +1,44 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../../api/api";
 import getTMDBImgSrc from "../../../utils/getTMDBImgSrc";
 import styles from "./MoviesDetailPage.module.scss";
 import { useAuth } from "../../../contexts/auth.context";
-import ProfileContext from "../../../contexts/profile.context";
+import { useProfile } from "../../../contexts/profile.context";
 
 function MoviesDetailPage() {
+  // 영화 고유의 id
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const { isLoggedIn } = useAuth();
-  const { likedMovies, addLikedMovie, removeLikedMovie } =
-    useContext(ProfileContext);
+  const { likedMovies, addLikedMovie, removeLikedMovie } = useProfile();
+  // 현재 영화가 좋아요 목록에 있는지 여부 확인
   const [isLiked, setIsLiked] = useState(false);
 
   const handleLike = () => {
     if (isLiked) {
+      // 이미 좋아요 된 영화 -> 목록에서 제거
       removeLikedMovie(movie.id);
     } else {
+      // 좋아요 된 영화가 아니라면 -> 목록에 추가
       addLikedMovie(movie);
     }
-    setIsLiked(!isLiked); // Toggle the isLiked state
+    // isLiked 상태를 반전 (true -> false, false -> true).
+    setIsLiked(!isLiked);
   };
 
+  // 영화데이터 로드
   useEffect(() => {
     api.movies.getMovie(movieId).then((movieData) => {
       setMovie(movieData);
+      // 현재 영화가 좋아하는 영화 목록에 있는지 여부확인 -> isLiked 상태를 설정
       setIsLiked(
         likedMovies.some((likedMovie) => likedMovie.id === movieData.id)
       );
     });
-  }, [movieId, likedMovies]); // Add likedMovies as a dependency
+  }, [movieId, likedMovies]);
+
+  // 영화데이터가 없다면  null
   if (movie === null) return null;
 
   console.log("movie", movie);
@@ -53,6 +61,7 @@ function MoviesDetailPage() {
             ))}
           </ul>
           <strong>👑 평점 {movie.vote_average}</strong>
+          {/* 로그인 확인, isLiked 상태에 따라 버튼의 아이콘 달라지도록 하기 */}
           {isLoggedIn && (
             <button className={styles.movieLikeBtn} onClick={handleLike}>
               <span className={styles.heartIcon}>{isLiked ? "❤️" : "🤍"}</span>
@@ -60,10 +69,6 @@ function MoviesDetailPage() {
           )}{" "}
         </div>
       </section>
-
-      {/* <section className={styles.backdrop}>
-        <img src={getTMDBImgSrc(movie.backdrop_path)} alt={movie.title} />
-      </section> */}
     </div>
   );
 }

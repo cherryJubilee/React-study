@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styles from "./MyPage.module.scss";
-import ProfileContext from "../../../contexts/profile.context";
+import { useProfile } from "../../../contexts/profile.context";
 import { Link } from "react-router-dom";
 
 function MyPage() {
-  const { nickname, setNickname, likedMovies } = useContext(ProfileContext);
+  const { nickname, setNickname, likedMovies } = useProfile(); // likedMovies: 좋아요 영화목록
   const [newNickname, setNewNickname] = useState(nickname);
 
   const handleNicknameChange = (event) => {
