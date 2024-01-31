@@ -1,0 +1,20 @@
+.wrapper {
+  margin: 0;
+  padding-left: 30px;
+
+  .nicknameForm {
+    padding: 10px 20px;
+
+    .nickname {
+      padding: 10px;
+      margin-right: 20px;
+      border-radius: 10px;
+    }
+    .nicknameBtn {
+      padding: 10px;
+      border-radius: 10px;
+      background-color: rgb(255, 221, 221);
+      border: 1px solid #eeeeee;
+    }
+  }
+}
