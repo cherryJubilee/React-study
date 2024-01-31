@@ -1,16 +1,9 @@
-import React, { useContext, useState } from "react";
 import styles from "./MoviesListItem.module.scss";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/auth.context";
-import ProfileContext from "../../contexts/profile.context";
 
 function MoviesListItem({ movie }) {
   const { isLoggedIn } = useAuth();
-  const { likedMovies, likeMovies, unLikeMovies } = useContext(ProfileContext);
-
-  const isLiked = likedMovies.includes(movie.id);
-
-  const changeLike = () => {};
 
   return (
     <Link to={`/movies/${movie.id}`} className={styles.wrapper}>
@@ -21,9 +14,7 @@ function MoviesListItem({ movie }) {
 
       <h6>{movie.title}</h6>
       {isLoggedIn && (
-        <div onClick={changeLike} className={styles.movieLikeBtn}>
-          {isLiked ? "" : "🤍"}
-        </div>
+        <button className={styles.movieLikeBtn}>좋아요 버튼 자리</button>
       )}
     </Link>
   );

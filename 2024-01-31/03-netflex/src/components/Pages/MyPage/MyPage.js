@@ -5,7 +5,6 @@ import ProfileContext from "../../../contexts/profile.context";
 function MyPage() {
   const { nickname, setNickname } = useContext(ProfileContext);
   const [newNickname, setNewNickname] = useState(nickname);
-  const { likedMovies, unlikeMovie } = useContext(ProfileContext);
 
   const handleNicknameChange = (event) => {
     setNewNickname(event.target.value);
@@ -35,7 +34,7 @@ function MyPage() {
         </button>
       </div>
 
-      <header className={styles.header}>
+      {/* <header className={styles.header}>
         <h1>좋아하는 영화</h1>
         <ul>
           {likedMovies.map((movie) => (
@@ -46,7 +45,7 @@ function MyPage() {
             </li>
           ))}
         </ul>
-      </header>
+      </header> */}
     </div>
   );
 }

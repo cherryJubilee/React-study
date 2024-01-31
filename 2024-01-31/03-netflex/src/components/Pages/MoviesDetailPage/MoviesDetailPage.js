@@ -1,28 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../../api/api";
 import getTMDBImgSrc from "../../../utils/getTMDBImgSrc";
 import styles from "./MoviesDetailPage.module.scss";
-import ProfileContext from "../../../contexts/profile.context";
 
 function MoviesDetailPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-  const { likeMovie } = useContext(ProfileContext);
 
   useEffect(() => {
     api.movies.getMovie(movieId).then((movieData) => setMovie(movieData));
   }, [movieId]);
-
-  const handleLike = () => {
-    if (movie) {
-      likeMovie({
-        id: movie.id,
-        title: movie.title,
-        img: getTMDBImgSrc(movie.poster_path),
-      });
-    }
-  };
 
   if (movie === null) return null;
 

@@ -1,16 +1,17 @@
+// require("dotenv").config();
+
 const options = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: 
-      `Bearer ${TMDB_ACCESS_TOKEN}`,
+    Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
   },
 };
 const getMovies = async (type) => {
   const endpoints = {
     nowPlaying:
       "https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&region=KR&page=1",
-    topRated:`
+    topRated:
       "https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&region=KR&page=1",
   };
 

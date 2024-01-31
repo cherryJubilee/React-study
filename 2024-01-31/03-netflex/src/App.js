@@ -16,7 +16,6 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/mypage" element={<MyPage />} />
-
             <Route path="/movies/:movieId" element={<MoviesDetailPage />} />
           </Route>
         </Routes>

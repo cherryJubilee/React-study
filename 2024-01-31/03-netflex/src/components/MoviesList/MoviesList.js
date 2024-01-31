@@ -8,11 +8,12 @@ function MoviesList({ listTitle, movies, isLoggedIn }) {
       <h2 className={styles.listTitle}>{listTitle}</h2>
 
       <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            <MoviesListItem movie={movie} isLoggedIn={isLoggedIn} />
-          </li>
-        ))}
+        {movies &&
+          movies.map((movie) => (
+            <li key={movie.id}>
+              <MoviesListItem movie={movie} isLoggedIn={isLoggedIn} />
+            </li>
+          ))}
       </ul>
     </section>
   );
