@@ -50,8 +50,8 @@ function SignInPage() {
             placeholder="비밀번호를 입력해 주세요"
           />
 
-          <button className={styles.button} onClick={handleClickSignIn}>
-            로그인하기
+          <button className={styles.logInBtn} onClick={handleClickSignIn}>
+            로그인
           </button>
         </form>
       )}

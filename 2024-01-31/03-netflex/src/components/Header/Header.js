@@ -13,33 +13,30 @@ function Header() {
       <Link to="/" className={styles.logo}>
         NETFLEX
       </Link>
+
       <nav>
         {isLoggedIn && (
-          <button>
-            <Link to="/mypage">마이페이지</Link>
-          </button>
-        )}
-
-        <ul>
-          {isLoggedIn ? (
-            //로그인 상태일 때
-            <>
-              {nickname && (
-                <li>
-                  <span>안녕하세요, {nickname}님!</span>
-                </li>
-              )}
+          <ul>
+            {nickname && (
               <li>
-                <button onClick={logOut}>로그아웃</button>
+                <span>안녕하세요, {nickname}님!</span>
               </li>
-            </>
-          ) : (
-            // 로그인 상태가 아닐 때
+            )}
             <li>
-              <Link to="/sign-in">로그인하기</Link>
+              <Link to="/mypage">마이페이지</Link>
             </li>
-          )}
-        </ul>
+            <li>
+              <button onClick={logOut}>로그아웃</button>
+            </li>
+          </ul>
+        )}
+        {!isLoggedIn && (
+          <ul>
+            <li>
+              <Link to="/sign-in">로그인</Link>
+            </li>
+          </ul>
+        )}
       </nav>
     </header>
   );
